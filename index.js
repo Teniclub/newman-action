@@ -3,10 +3,10 @@ const github = require('@actions/github');
 const newman = require('newman');
 
 try {
+    const apiKey = '?apikey=' + core.getInput('postmanApiKey');
     const options = {
-        apiKey: '?apikey=' + core.getInput('postmanApiKey'),
-        collection: core.getInput('collection'),
-        environment: core.getInput('environment')
+        collection: 'https://api.getpostman.com/collections/' + core.getInput('collection') + apiKey,
+        environment: 'https://api.getpostman.com/environments/' + core.getInput('environment') + apiKey,
     }
 
     const payload = JSON.stringify(github.context.payload, undefined, 2)
@@ -18,6 +18,7 @@ try {
   }
 
   function runNewman (options) {
+    console.log("new");
     newman.run(options).on('start', (err, args) => {
         console.log('start');
     }).on('done', (err, summary) => {
