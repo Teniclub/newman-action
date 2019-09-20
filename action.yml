@@ -1,0 +1,18 @@
+name: 'Newman Action'
+description: 'Call Newman for collection testing'
+inputs:
+  postmanApiKey:
+    description: 'Who to greet'
+    required: true
+  collection:
+    description: 'ID of collection'
+    required: true
+  environment: 
+    description: 'ID of environment'
+    required: true
+outputs:
+  passed: # id of output
+    description: 'If your collection has passed tests'
+runs:
+  using: 'node12'
+  main: 'dist/index.js'
