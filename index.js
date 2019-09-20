@@ -19,13 +19,8 @@ try {
 
   function runNewman (options) {
     console.log("new");
-    newman.run(options).on('start', (err, args) => {
-        console.log('start');
-    }).on('done', (err, summary) => {
-      console.log(summary);
-      console.log(err);
-      if (err || summary.run.failures.length) {
-        core.setFailed('Newman run failed!' + (err || ''))
-      }
+    newman.run(options, function (err) {
+        if (err) { throw err; }
+        console.log('collection run complete!');
     });
   }
