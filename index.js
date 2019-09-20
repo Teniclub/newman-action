@@ -1,6 +1,6 @@
 const core = require('@actions/core');
 const github = require('@actions/github');
-const newman = require('@newman');
+const newman = require('newman');
 
 try {
     const nameToGreet = core.getInput('who-to-greet');
