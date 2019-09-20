@@ -18,10 +18,13 @@ try {
   }
 
   function runNewman (options) {
-    newman.run(options).on('done', (err, summary) => {
+    newman.run(options).on('start', (err, args) => {
+        console.log('start');
+    }).on('done', (err, summary) => {
       console.log(summary);
+      console.log(err);
       if (err || summary.run.failures.length) {
         core.setFailed('Newman run failed!' + (err || ''))
       }
-    })
+    });
   }
